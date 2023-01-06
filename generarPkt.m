@@ -1,0 +1,21 @@
+function [] = generarPkt(numNodo, ta)
+    fprintf('<--- Creacion Paquete ---> \n');
+    global nodos
+    global pkts
+    global contadorPkts_red; 
+    global contadorPkts_gen;
+    global t_sim;
+    
+    pkts(contadorPkts_gen).id = contadorPkts_gen;
+    %Ubicamos nodo
+    [pkts(contadorPkts_gen).nodo_id, pkts(contadorPkts_gen).nodo_grado] = nodoInfo(numNodo);
+    %Le pegamos el paquete al nodo
+    [nodos(numNodo).buffer ,nodos(numNodo).buffer_c] = agregarPkt(nodos(numNodo).buffer ,nodos(numNodo).buffer_c, contadorPkts_gen);
+    %Guardamos temporalizadores
+    pkts(contadorPkts_gen).tEntradaBuffer = t_sim;
+    pkts(contadorPkts_gen).tInicioBuffer = t_sim;
+    pkts(contadorPkts_gen).estado = -1; %Estado por default
+    %Ajustamos variables para la siguiente llamada a la funcion
+    contadorPkts_red = contadorPkts_red + 1;
+    contadorPkts_gen = contadorPkts_gen + 1; 
+end

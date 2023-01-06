@@ -1,0 +1,17 @@
+if(grado == 0)
+    for aux=1:10
+        vectorGrado_i = vectorGrado_i + 1;
+        if( ~isempty(nodos(aux).buffer))
+            nodos(aux).backOff = ceil((W-1)*rand);
+            vectorGrado(vectorGrado_i) = nodos(aux).backOff;
+        end
+    end
+else
+    for aux = (gradoAux+1):gradoFin
+        vectorGrado_i = vectorGrado_i + 1;
+        if( ~isempty(nodos(aux).buffer))
+            nodos(aux).backOff = ceil((W-1)*rand);
+            vectorGrado(vectorGrado_i) = nodos(aux).backOff;
+        end
+    end
+end
